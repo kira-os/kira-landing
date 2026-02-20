@@ -13,9 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy to kira-landing (www.kira.ngo)
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: 9921be3b2e194f4f0af3bd01ae704a82
           command: pages deploy . --project-name=kira-landing --branch=main
+
+      - name: Deploy to kira-ngo (kira.ngo apex)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 9921be3b2e194f4f0af3bd01ae704a82
+          command: pages deploy . --project-name=kira-ngo --branch=main
